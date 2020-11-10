@@ -228,13 +228,14 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("Username", password),
-        _entryField("Password", userName, isPassword: true),
+        _entryField("Username", userName),
+        _entryField("Password", password, isPassword: true),
       ],
     );
   }
 
   void submitForm() async {
+    final locale = AppLocalizations.of(context);
     try {
       final isValidate = _formKey.currentState.validate();
       if (!isValidate) {
@@ -242,7 +243,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }
       FocusManager.instance.primaryFocus.unfocus();
       final state = Provider.of<AuthState>(context, listen: false);
-      state.setEmail = userName.text;
+      state.setUserName = userName.text;
       state.setPassword = password.text;
       isLoading.value = true;
       final data = await state.login();
@@ -250,8 +251,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushReplacement(context, HomePage.getRoute());
       } else {
         Utility.displaySnackbar(context,
-            msg: "Some error occured. Please try again in some time!!",
-            key: scaffoldKey);
+            msg: locale.translate("invalidUsernamePassword"), key: scaffoldKey);
       }
     } catch (error) {
       print("SCreen ${error.message}");
@@ -263,6 +263,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     var appLanguage = Provider.of<AppLanguageState>(context, listen: false);
+    final locale = AppLocalizations.of(context);
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: scaffoldKey,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game_tournaments_app/helper/share_prefrence_helprer.dart';
+import 'package:flutter_game_tournaments_app/states/auth_state.dart';
 import 'package:flutter_game_tournaments_app/ui/pages/login_screen.dart';
 import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 
 import 'home_page.dart';
 
@@ -24,11 +26,14 @@ class _SplashPageState extends State<SplashPage> {
   void doAutoLogin() async {
     final getIt = GetIt.instance;
     final prefs = getIt<SharedPrefrenceHelper>();
-    final accessToken = await prefs.getUserProfile();
-    if (accessToken != null) {
+    final model = await prefs.getUserProfile();
+    if (model != null) {
       print("***************** Auto Login ***********************");
+      Provider.of<AuthState>(context, listen: false).setUser = model;
       Navigator.of(context)
           .pushAndRemoveUntil(HomePage.getRoute(), (_) => false);
+
+      // Navigator.pushReplacement(context, LoginScreen.getRoute());
     } else {
       Navigator.pushReplacement(context, LoginScreen.getRoute());
     }

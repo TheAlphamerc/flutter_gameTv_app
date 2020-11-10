@@ -4,6 +4,7 @@
     "fieldEmptyText":"Field can not be empty",
     "nameShouldBeAtleast":"Username should have min 3 character",
     "nameMustBeLessThan" :"Username should be less then or equal to 10 character",
-    "passwordMustLessThan":"Password should have min 3 character",
-    "passwordShouldBeAtleast" :"Password should be less then or equal to 10 character"
+    "passwordMustLessThan":"Password should be less then or equal to 10 character",
+    "passwordShouldBeAtleast" :"Password should have min 3 character",
+    "invalidUsernamePassword":"Invalid username or password"
 }

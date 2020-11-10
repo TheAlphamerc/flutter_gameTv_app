@@ -4,6 +4,7 @@ import 'package:flutter_game_tournaments_app/states/app_language_state.dart';
 import 'package:flutter_game_tournaments_app/states/auth_state.dart';
 import 'package:flutter_game_tournaments_app/localization/app_localizations.dart';
 import 'package:flutter_game_tournaments_app/localization/AppLanguage.dart';
+import 'package:flutter_game_tournaments_app/states/home_state.dart';
 import 'package:flutter_game_tournaments_app/ui/theme/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -55,6 +56,7 @@ class _GameTvAppState extends State<GameTvApp> {
         ChangeNotifierProvider<AppLanguageState>(
             create: (context) => AppLanguageState()),
         ChangeNotifierProvider<AuthState>(create: (context) => AuthState()),
+        ChangeNotifierProvider<HomeState>(create: (context) => HomeState()),
       ],
       child: Consumer<AppLanguageState>(builder: (context, model, child) {
         return MaterialApp(
