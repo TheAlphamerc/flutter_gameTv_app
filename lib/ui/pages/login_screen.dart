@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_tournaments_app/helper/share_prefrence_helprer.dart';
 import 'package:flutter_game_tournaments_app/helper/utility.dart';
 import 'package:flutter_game_tournaments_app/helper/validator.dart';
 import 'package:flutter_game_tournaments_app/localization/app_localizations.dart';
 import 'package:flutter_game_tournaments_app/states/app_language_state.dart';
 import 'package:flutter_game_tournaments_app/states/auth_state.dart';
-import 'package:flutter_game_tournaments_app/ui/kit.dart';
 import 'package:flutter_game_tournaments_app/ui/pages/home_page.dart';
-import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
-
+  static MaterialPageRoute getRoute() =>
+      MaterialPageRoute(builder: (_) => LoginScreen());
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -267,42 +265,43 @@ class _LoginScreenState extends State<LoginScreen> {
     var appLanguage = Provider.of<AppLanguageState>(context, listen: false);
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
-        key: scaffoldKey,
-        body: Container(
-          child: Stack(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: SingleChildScrollView(
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(height: height * .1),
-                        _title(),
-                        _emailPasswordWidget(),
-                        SizedBox(height: 20),
-                        _submitButton(),
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          alignment: Alignment.centerRight,
-                          child: Text('Forgot Password ?',
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w500)),
-                        ),
-                        _divider(),
-                        _facebookButton(),
-                        SizedBox(height: height * .055),
-                        _createAccountLabel(),
-                      ],
-                    ),
+      key: scaffoldKey,
+      body: Container(
+        child: Stack(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(height: height * .1),
+                      _title(),
+                      _emailPasswordWidget(),
+                      SizedBox(height: 20),
+                      _submitButton(),
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        alignment: Alignment.centerRight,
+                        child: Text('Forgot Password ?',
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w500)),
+                      ),
+                      _divider(),
+                      _facebookButton(),
+                      SizedBox(height: height * .055),
+                      _createAccountLabel(),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

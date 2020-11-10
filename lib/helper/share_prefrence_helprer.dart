@@ -24,6 +24,9 @@ class SharedPrefrenceHelper {
   Future<UserModel> getUserProfile() async {
     final jsonString = (await SharedPreferences.getInstance())
         .getString(UserPreferenceKey.UserProfile.toString());
+    if (jsonString == null) {
+      return null;
+    }
     return UserModel.fromJson(json.decode(jsonString));
   }
 }

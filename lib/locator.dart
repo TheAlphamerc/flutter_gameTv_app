@@ -11,11 +11,8 @@ import 'package:get_it/get_it.dart';
 void setUpDependency(Config config) {
   final serviceLocator = GetIt.instance;
 
-  // serviceLocator.registerSingleton<ErrorsProducer>(ErrorsProducer());
   serviceLocator
       .registerSingleton<SharedPrefrenceHelper>(SharedPrefrenceHelper());
-
-  /// Initilise nitificaion plugin
 
   serviceLocator.registerSingleton<ApiGateway>(
     ApiGatewayImpl(
@@ -23,18 +20,8 @@ void setUpDependency(Config config) {
       pref: GetIt.instance<SharedPrefrenceHelper>(),
     ),
   );
-  // serviceLocator.registerFactory<SessionService>(
-  //   () => SessionServiceImpl(
-  //     GetIt.instance<ApiGateway>(),
-  //     GetIt.instance<SharedPrefrenceHelper>(),
-  //   ),
-  // );
   serviceLocator.registerSingleton(Repository(
     GetIt.instance<ApiGateway>(),
+    GetIt.instance<SharedPrefrenceHelper>(),
   ));
-  // serviceLocator.registerSingleton(TeacherRepository(
-  //   GetIt.instance<ApiGateway>(),
-  //   GetIt.instance<SessionService>(),
-  //   GetIt.instance<SharedPrefrenceHelper>(),
-  // ));
 }
