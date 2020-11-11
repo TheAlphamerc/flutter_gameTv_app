@@ -1,4 +1,26 @@
 {
     "app_name":"ゲームテレビ",
-    "login" :"ログインする"
+    "login":"ログインする",
+    "fieldEmptyText":"フィールドを空にすることはできません",
+    "nameShouldBeAtleast":"ユーザー名は3文字以上にする必要があります",
+    "nameMustBeLessThan" :"ユーザー名は10文字以下である必要があります",
+    "passwordMustLessThan":"パスワードは10文字以下である必要があります",
+    "passwordShouldBeAtleast" :"パスワードは3文字以上にする必要があります",
+    "invalidUsernamePassword":"無効なユーザー名またはパスワード",
+    "forgotPassword":"パスワードをお忘れですか ？",
+    "recommendedForYou":"あなたにおすすめ",
+    "loginWithFacebook":"Facebookでログインする",
+    "DontHaveAccount":"アカウントをお持ちではありませんか？",
+    "register":"登録",
+    "username":"ユーザー名",
+    "password":"パスワード",
+    "tournament":"トーナメント",
+    "played":"遊んだ",
+    "won":"勝った",
+    "winning":"勝つ",
+    "percentage":"パーセンテージ",
+    "rating":"評価",
+    "language":"言語",
+    "logout":"ログアウト",
+    "or":"または"
 }

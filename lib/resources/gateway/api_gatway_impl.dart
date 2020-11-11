@@ -16,13 +16,25 @@ class ApiGatewayImpl implements ApiGateway {
     await Future.delayed(Duration(seconds: 3));
     if (model.userName == "9898989898" && model.password == "password12") {
       return model.copyWith(
-          avatar: "assets/user_1.jpg",
-          name: "Simon Baker",
-          userName: "FlyingWolf");
+        avatar: "assets/user_1.jpg",
+        name: "Simon Baker",
+        userName: "FlyingWolf",
+        rating: 2250,
+        percentage: 30,
+        played: 12,
+        won: 34,
+      );
     } else if (model.userName == "9876543210" &&
-        model.password == "password123") {
+        model.password == "password12") {
       return model.copyWith(
-          avatar: "assets/user_2.jpg", name: "John Doe", userName: "Rynalolf");
+        avatar: "assets/user_2.jpg",
+        name: "John Doe",
+        userName: "Rynalolf",
+        rating: 2250,
+        percentage: 60,
+        played: 22,
+        won: 14,
+      );
     } else {
       throw UnauthorisedException("Invalid userName and password");
     }

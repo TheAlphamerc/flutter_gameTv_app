@@ -6,5 +6,21 @@
     "nameMustBeLessThan" :"Username should be less then or equal to 10 character",
     "passwordMustLessThan":"Password should be less then or equal to 10 character",
     "passwordShouldBeAtleast" :"Password should have min 3 character",
-    "invalidUsernamePassword":"Invalid username or password"
+    "invalidUsernamePassword":"Invalid username or password",
+    "forgotPassword":"Forgot Password ?",
+    "recommendedForYou":"Recommended for you",
+    "loginWithFacebook":"Log in with Facebook",
+    "DontHaveAccount":"Don\\'t have an account ?",
+    "register":"Register",
+    "username":"Username",
+    "password":"Password",
+    "tournament":"Tournaments",
+    "played":"played",
+    "won":"Won",
+    "winning":"Winning",
+    "percentage":"percentage",
+    "rating":"Rating",
+    "language":"Language",
+    "logout":"Logout",
+    "or":"OR"
 }

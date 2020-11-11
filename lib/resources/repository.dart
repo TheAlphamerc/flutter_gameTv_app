@@ -10,7 +10,7 @@ class Repository {
 
   Future<UserModel> login(model) async {
     var user = await apiGateway.login(model);
-    pref.saveUserProfile(user);
+    await pref.saveUserProfile(user);
     return user;
   }
 

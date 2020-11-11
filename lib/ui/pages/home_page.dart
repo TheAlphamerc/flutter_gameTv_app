@@ -1,11 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_game_tournaments_app/localization/app_localizations.dart';
 import 'package:flutter_game_tournaments_app/model/tournament_model.dart';
 import 'package:flutter_game_tournaments_app/model/userModel.dart';
+import 'package:flutter_game_tournaments_app/states/app_language_state.dart';
 import 'package:flutter_game_tournaments_app/states/auth_state.dart';
 import 'package:flutter_game_tournaments_app/states/home_state.dart';
+import 'package:flutter_game_tournaments_app/ui/kit.dart';
+import 'package:flutter_game_tournaments_app/ui/pages/login_screen.dart';
 import 'package:flutter_game_tournaments_app/ui/theme/theme.dart';
 import 'package:flutter_game_tournaments_app/ui/widget/load_more_scroll_view.dart';
+import 'package:flutter_game_tournaments_app/ui/widget/sidebar.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,6 +23,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     super.initState();
@@ -28,54 +34,83 @@ class _HomePageState extends State<HomePage> {
   Widget _userinfoSection(
     UserModel user,
   ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Row(
-        children: <Widget>[
-          Container(
-            height: 60,
-            width: 60,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              image: DecorationImage(
-                image: AssetImage(user.avatar),
-              ),
-            ),
-          ),
-          SizedBox(width: 20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                user.name,
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              SizedBox(height: 10),
-              Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                  decoration: BoxDecoration(
+    return SliverAppBar(
+      forceElevated: false,
+      expandedHeight: 216,
+      elevation: 0,
+      stretch: true,
+      leading: null,
+      iconTheme: IconThemeData(color: Colors.transparent),
+      backgroundColor: Colors.transparent,
+      flexibleSpace: FlexibleSpaceBar(
+        stretchModes: [
+          StretchMode.blurBackground,
+          StretchMode.zoomBackground,
+          StretchMode.fadeTitle
+        ],
+        background: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: Colors.deepPurpleAccent)),
-                  child: Row(
+                      image: DecorationImage(
+                        image: AssetImage(user?.avatar),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "2250",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            .copyWith(color: Colors.deepPurpleAccent),
+                        user.name,
+                        style: Theme.of(context).textTheme.headline6,
                       ),
-                      Text(
-                        " Elo Rating",
-                        style: Theme.of(context).textTheme.bodyText1.copyWith(
-                            color: Colors.deepPurpleAccent, fontSize: 13),
-                      )
+                      SizedBox(height: 10),
+                      Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              border:
+                                  Border.all(color: Colors.deepPurpleAccent)),
+                          child: Row(
+                            children: [
+                              Text(
+                                "2250 ",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    .copyWith(color: Colors.deepPurpleAccent),
+                              ),
+                              Text(
+                                translate("rating"),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    .copyWith(
+                                        color: Colors.deepPurpleAccent,
+                                        fontSize: 13),
+                              )
+                            ],
+                          ))
                     ],
-                  ))
-            ],
-          )
-        ],
+                  )
+                ],
+              ),
+            ),
+            SizedBox(height: 10),
+            _statics(user),
+            SizedBox(height: 10),
+          ],
+        ),
       ),
     );
   }
@@ -111,13 +146,13 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("34",
+                  Text("${model.played}",
                       style: theme.textTheme.headline6
                           .copyWith(color: theme.colorScheme.onPrimary)),
-                  Text("Tournaments",
+                  Text(translate("tournament"),
                       style: theme.textTheme.bodyText1
                           .copyWith(color: theme.colorScheme.onPrimary)),
-                  Text("played",
+                  Text(translate("played"),
                       style: theme.textTheme.bodyText1
                           .copyWith(color: theme.colorScheme.onPrimary))
                 ],
@@ -140,13 +175,13 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("09",
+                  Text("${model.won}",
                       style: theme.textTheme.headline6
                           .copyWith(color: theme.colorScheme.onPrimary)),
-                  Text("Tournaments",
+                  Text(translate("tournament"),
                       style: theme.textTheme.bodyText1
                           .copyWith(color: theme.colorScheme.onPrimary)),
-                  Text("won",
+                  Text(translate("won"),
                       style: theme.textTheme.bodyText1
                           .copyWith(color: theme.colorScheme.onPrimary))
                 ],
@@ -171,13 +206,13 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("26",
+                  Text("${model.percentage}",
                       style: theme.textTheme.headline6
                           .copyWith(color: theme.colorScheme.onPrimary)),
-                  Text("Wining",
+                  Text(translate("winning"),
                       style: theme.textTheme.bodyText1
                           .copyWith(color: theme.colorScheme.onPrimary)),
-                  Text("percentage",
+                  Text(translate("percentage"),
                       style: theme.textTheme.bodyText1
                           .copyWith(color: theme.colorScheme.onPrimary))
                 ],
@@ -229,56 +264,70 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  String translate(String title) =>
+      AppLocalizations.of(context).translate(title);
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Consumer<AuthState>(
       builder: (context, authState, child) {
         return Scaffold(
+          key: scaffoldKey,
           appBar: AppBar(
-            leading: Icon(Icons.short_text),
+            elevation: 0,
+            leading: IconButton(
+              onPressed: () {
+                scaffoldKey.currentState.openDrawer();
+              },
+              icon: Icon(Icons.short_text),
+            ),
             title: Text(authState.user?.userName ?? ""),
           ),
-          body: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
+          drawer: Sidebar(),
+          body: NestedScrollView(
+            headerSliverBuilder: (BuildContext context, bool boxIsScrolled) {
+              return <Widget>[
                 _userinfoSection(authState.user),
-                SizedBox(height: 10),
-                _statics(authState.user),
-                SizedBox(height: 10),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Text("Recomended for you",
-                      style: theme.textTheme.headline5),
-                ),
-                Expanded(
+                SliverToBoxAdapter(
                   child: Container(
-                    child: Consumer<HomeState>(
-                      builder: (context, state, child) {
-                        if (state.isBusy) {
-                          return Center(child: CircularProgressIndicator());
-                        } else if (state.tournaments == null) {
-                          return Center(child: Text("Error"));
-                        } else {
-                          return LoadMoreScrollView(
-                            isLoading: state.isBusy,
-                            onEndOfPage: () async {
-                              await state.getTournaments();
-                            },
-                            child: ListView.builder(
-                                itemCount: state.tournaments.length,
-                                itemBuilder: (context, index) {
-                                  return _tournamentCard(
-                                      state.tournaments[index]);
-                                }),
-                          );
-                        }
-                      },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(translate("recommendedForYou"),
+                              style: theme.textTheme.headline5),
+                        ),
+                      ],
                     ),
                   ),
                 )
-              ],
+              ];
+            },
+            body: Container(
+              child: Consumer<HomeState>(
+                builder: (context, state, child) {
+                  if (state.isBusy) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state.tournaments == null) {
+                    return Center(child: Text("Error"));
+                  } else {
+                    return LoadMoreScrollView(
+                      isLoading: state.isBusy,
+                      onEndOfPage: () async {
+                        await state.getTournaments();
+                      },
+                      child: ListView.builder(
+                          itemCount: state.tournaments.length,
+                          itemBuilder: (context, index) {
+                            return _tournamentCard(state.tournaments[index]);
+                          }),
+                    );
+                  }
+                },
+              ),
             ),
           ),
         );

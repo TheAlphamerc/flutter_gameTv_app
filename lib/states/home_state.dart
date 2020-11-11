@@ -22,6 +22,8 @@ class HomeState extends ChangeNotifier {
         return;
       }
       isBusy = true;
+      print("Api calling");
+
       final getit = GetIt.instance;
       final repo = getit.get<Repository>();
       var responseModel = await repo.getTournaments(cursor);

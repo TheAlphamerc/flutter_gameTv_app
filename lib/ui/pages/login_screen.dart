@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       },
       child: Text(
-        'Login',
+        translate("login"),
         style: TextStyle(fontSize: 20, color: Colors.white),
       ),
     );
@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          Text('or'),
+          Text(translate("or")),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -176,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     topRight: Radius.circular(5)),
               ),
               alignment: Alignment.center,
-              child: Text('Log in with Facebook',
+              child: Text(translate("loginWithFacebook"),
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -202,14 +202,14 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Don\'t have an account ?',
+              translate("DontHaveAccount").replaceFirst("\\", ""),
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
             ),
             SizedBox(
               width: 10,
             ),
             Text(
-              'Register',
+              translate("register"),
               style: TextStyle(
                   color: Color(0xfff79c4f),
                   fontSize: 13,
@@ -228,8 +228,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("Username", userName),
-        _entryField("Password", password, isPassword: true),
+        _entryField(translate("username"), userName),
+        _entryField(translate("password"), password, isPassword: true),
       ],
     );
   }
@@ -262,8 +262,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var appLanguage = Provider.of<AppLanguageState>(context, listen: false);
-    final locale = AppLocalizations.of(context);
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: scaffoldKey,
@@ -287,7 +285,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 10),
                         alignment: Alignment.centerRight,
-                        child: Text('Forgot Password ?',
+                        child: Text(translate("forgotPassword"),
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.w500)),
                       ),
