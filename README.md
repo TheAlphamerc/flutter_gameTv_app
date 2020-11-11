@@ -1,6 +1,16 @@
-# flutter_game_tournaments_app
+# GameTV App
 
 A new Flutter project.
+
+## Login credential
+* User 1: 9898989898 / password12
+* User 2: 9876543210 / password12
+
+## Feature
+* Authentication
+* support for localization in the app for English and Japanese.
+* Recommended section of tournament haviing infinite scroll using pagination
+* Provider state management architeture
 
 ## Getting Started
 
